@@ -1,0 +1,104 @@
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{cmap}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{sectsty}
+\usepackage{fancyhdr}
+\usepackage{longtable}
+\usepackage{indentfirst}
+\usepackage{url}
+\usepackage{appendix}
+\usepackage{enumerate}
+\usepackage{totcount}
+
+\newcommand{\EN}[1]{{#1}}
+\newcommand{\CODE}[1]{{\ttfamily #1}}
+
+\fancyhf{}
+\fancyfoot[C]{\normalsize \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%%Modifying captions for figures and tables:
+\makeatletter
+\long\def\@makecaption#1#2{%
+\vspace{\abovecaptionskip}%
+\sbox{\@tempboxa}{\large #1.~#2}
+\ifdim \wd\@tempboxa >\hsize
+{\large #1 --- #2}\par
+\else
+\global\@minipagefalse
+\hbox to \hsize {\hfill {\large #1 --- #2}\hfill}%
+\fi
+\vspace{\belowcaptionskip}}
+
+\renewcommand{\baselinestretch}{1.2}
+%%\sectionfont{\LARGE}
+\sectionfont{\Large}
+\subsectionfont{\Large}
+\subsubsectionfont{\Large}
+\setlength{\belowcaptionskip}{6pt}
+\makeatletter \renewcommand{\@biblabel}[1]{#1.\hfill}
+
+\makeatletter 
+\def\redeflsection{\def\l@section{\@dottedtocline{1}{1.5em}{7.8em}}} 
+\renewcommand\appendix{\par 
+\setcounter{section}{0}% 
+\setcounter{subsection}{0}% 
+\def\@chapapp{\appendixname}% 
+\addtocontents{toc}{\protect\redeflsection} 
+\def\thesection{\appendixname\hspace{0.2cm}\@Asbuk\c@section}} 
+\makeatother 
+
+\textwidth = 17cm
+\oddsidemargin= 0 pt
+\topmargin = -1cm
+\headheight = 0cm
+\headsep = 0cm
+\textheight = 26.5cm
+
+\newtotcounter[auxfile=totals.aux]{figurecnt}
+\def\oldfigure{} \let\oldfigure=\figure
+\def\figure{\stepcounter{figurecnt}\oldfigure}
+\newtotcounter[auxfile=totals.aux]{bibcnt}
+\def\oldbibitem{} \let\oldbibitem=\bibitem
+\def\bibitem{\stepcounter{bibcnt}\oldbibitem}
+\regtotcounter[auxfile=totals.aux]{page}
+
+
+\begin{document}
+\def\figurename{Рисунок}
+\sloppy
+\input{title}
+\newpage
+\input{referat}
+\newpage
+\pagestyle{fancy}
+\renewcommand{\contentsname}{Оглавление}
+\tableofcontents 
+\newpage
+\input{intro}
+\newpage
+\input{main}
+\newpage
+\input{conclusion}
+\newpage
+
+\addcontentsline{toc}{section}{\hspace{7mm}Список литературы}
+\begin{thebibliography}{0}
+\input{bibliography}
+\end{thebibliography}
+\newpage
+
+\begin{center}
+Приложение
+\end{center}
+\addcontentsline{toc}{section}{\hspace{7mm}Приложение}
+\input{appendix}
+\end{document}
