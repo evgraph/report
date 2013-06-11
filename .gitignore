@@ -1,5 +1,16 @@
-paper/*.pdf
+\paper/*.pdf
 presentation/*.pdf
 /*.pdf
 
+*.log
+*.aux
+*.toc
+*.dvi
+*.ps
+*.mps
+*.out
+*.nav
+*.snm
+
 **~
+
